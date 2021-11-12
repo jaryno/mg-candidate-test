@@ -18,19 +18,26 @@ class BowlingGame {
 
     const i = this.frames.length - 1;
 
-    if(i < MAX_ROUNDS - 1) {
-      this.pushToFrame(this.frames[i], pins);
+    if(this.isLastFrame(i)) {
 
-      if(this.frames[i].length === 2 || pins === MAX_PINS) {
-        this.frames.push([]);
-      }
-    } else {
       if(this.frames[i].length < 3) {
         this.pushToLastFrame(this.frames[i], pins);
         return;
       }
       throw new Error(errorTextGameOver());
+
+    } else {
+
+      this.pushToFrame(this.frames[i], pins);
+      if(this.frames[i].length === 2 || pins === MAX_PINS) {
+        this.frames.push([]);
+      }
+
     }
+  }
+
+  private isLastFrame(index: number) {
+    return index >= MAX_ROUNDS - 1;
   }
 
   private pushToFrame(frame: number[], pins: number) {
