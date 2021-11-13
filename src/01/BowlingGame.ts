@@ -65,7 +65,7 @@ class BowlingGame {
     let index = 0;
     let round = 1;
 
-    const rolls = this.getRolls();
+    const rolls = this.getRolls(this.frames);
 
     while(index < rolls.length) {
       if(rolls[index] == null || round > MAX_ROUNDS) {
@@ -121,9 +121,9 @@ class BowlingGame {
     return rolls[index] + this.getRollValue(rolls,index + 1) + this.getRollValue(rolls,index + 2);
   }
 
-  private getRolls(): number[] {
+  private getRolls(frames: number[][]): number[] {
     const rolls = [];
-    for(const frame of this.frames) {
+    for(const frame of frames) {
       for(const pins of frame) {
         rolls.push(pins);
       }
